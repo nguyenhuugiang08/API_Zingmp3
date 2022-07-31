@@ -3,14 +3,21 @@ const app = express();
 const cors = require('cors');
 const route = require('./routes')
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+var whitelist = ['http://localhost:3000', 'https://zing-clone-react-app.herokuapp.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
   }
-  app.use(cors(corsOptions));
+}
+
+app.use(cors(corsOptions));
 
 route(app);
 
-app.listen(process.env.PORT || 4000,()=>{
-    console.log('successfully');
+app.listen(process.env.PORT || 4000, () => {
+  console.log('successfully');
 })
