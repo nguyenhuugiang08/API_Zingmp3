@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const route = require('./routes')
 
-var whitelist = ['http://localhost:3000', 'https://zing-clone-react-app.herokuapp.com']
+var whitelist = ['http://localhost:3000', 'https://zing-clone-react-app.herokuapp.com', 'https://api-zing-clone.herokuapp.com/']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
